@@ -117,6 +117,7 @@ const getCountryById = async (req, res) => {
 module.exports = {
     getCountriesApi,
     getAllCountries,
+    getCountryByName,
     getCountries,
     getCountryById
 }

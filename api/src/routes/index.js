@@ -3,6 +3,7 @@ const { Router } = require('express');
 // Ejemplo: const authRouter = require('./auth.js');
 const bodyParser = require('body-parser');
 const CountryRoutes = require('./CountryRoutes');
+const ActivityRoutes = require('./ActivityRoutes');
 
 const router = Router();
 
@@ -12,5 +13,6 @@ router.use(bodyParser.json());
 
 //rutas
 router.use('/countries', CountryRoutes)
+router.use('/activity', ActivityRoutes)
 
 module.exports = router;
