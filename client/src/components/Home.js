@@ -1,58 +1,75 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCountries } from '../actions';
-//import axios from 'axios';
+import { getCountries, sortByAlph } from '../actions';
+import Countrys from './Countrys';
+import Filtros from './Filtros';
+import NavBar from './NavBar';
+import Paged from './Paged';
 
 function Home() {  
-  
-  //Montaje del componente
-  useEffect(() => {
-    // const apiCall = async () => {
-    //   await dispatch(getCountries())
-    // }
-    // apiCall();
-    dispatch(getCountries())
-  }, [])
-  
   const countries = useSelector(state => state.countries)
-  const dispatch = useDispatch();
+  const dispatch = useDispatch();  
   
-  //Paginado
+  //PAGINADO
   const itemsPerPage = 10;
-  const itemsToShow = countries.length / itemsPerPage
   const [currentPage, setCurrentPage] = useState(1)
-  const [firstIndex, setFirstIndex] = useState(0)
+  const lastCountry = currentPage * itemsPerPage; // 1 * 10 = 10
+  const firstCountry = lastCountry - itemsPerPage; // 10 - 10 = 0
+  const currentCountrys = countries.slice(firstCountry,lastCountry);
 
-  function handleNextPage(){
-    if(currentPage === itemsToShow) return
-    setFirstIndex((prevState)=> (prevState + 1) * itemsPerPage)
-    setCurrentPage((prevState)=> prevState + 1)
+  const paged = (page)=>{
+    setCurrentPage(page)
   }
 
-  function handlePrevPage(){
-    if(currentPage === 1) return
-    setFirstIndex((prevState)=> (prevState - 1) * itemsPerPage)
-    setCurrentPage((prevState)=> prevState - 1)
+  //MONTAJE DEL COMPONENTE
+  useEffect(() => {
+    dispatch(getCountries())
+  }, [dispatch])
+
+  //FILTROS
+  function handleChangeAlph(e) {
+    dispatch(sortByAlph(e.target.value))
+    setCurrentPage(()=> 0)
+    setTimeout(() => {
+      setCurrentPage(()=> 1)
+    }, 1);
   }
 
-  console.log(countries)
+  function handleChangePopu(e) {
+    console.log(e.target.value)
+  }
 
-  return (
-    <div>
-      <input type='text' placeholder='Ingrese un país...'/>
-      {countries.length > 0 
-        ? [...countries]?.splice(firstIndex,itemsPerPage)?.map(el => (
-          <li key={el.id}>
-            <h2>{el.name}</h2>
-          </li>
-        ))
-        : <h2>Cargando... espere un momento</h2>
-      }
-      <h3>Page: {currentPage}</h3>
-      <button onClick={handlePrevPage}>Retroceder Pagina</button>
-      <button onClick={handleNextPage}>Avanzar Pagina</button>
-    </div>
-  )
+  function handleChangeCont(e) {
+      console.log(e.target.value)
+  }
+
+  if(countries.length < 1){
+    return (
+      <h1>Cargando espere</h1>
+    )
+  } else {
+    return (
+      <div>
+        <NavBar/>
+        <Filtros 
+          handleChangeAlph={handleChangeAlph}
+          handleChangePopu={handleChangePopu}
+          handleChangeCont={handleChangeCont}
+        />
+
+        <Countrys 
+          currentCountrys={currentCountrys}
+        />
+
+        <Paged 
+          itemsPerPage={itemsPerPage}
+          countries={countries.length}
+          paged={paged}
+        />
+
+      </div>
+    )
+  }
 }
 
 export default Home
