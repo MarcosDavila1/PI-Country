@@ -1,6 +1,7 @@
 const { Country, Activity } = require('../db');
 const axios = require('axios');
 const { Op } = require('sequelize');
+var sequelize = require('sequelize');
 
 const getCountriesApi = async () => {
     try {
@@ -71,17 +72,48 @@ const getCountryByName = async (name) => {
 }
 
 const getCountries = async (req, res) => {
-    const { name } = req.query;    
+    const { name, alph, population } = req.query;    
     try {
-        if(name){
+        if(alph){
+            if(alph === 'desc'){
+                var desc = await Country.findAll({
+                    order: sequelize.literal('name DESC')
+                })
+                res.send(desc)
+            }
+            if(alph === 'asc'){
+                var asc = await Country.findAll({
+                    order: sequelize.literal('name ASC')
+                })
+                res.send(asc)
+            }
+        }
+        else if (population) { 
+            if (population === 'desc') {
+                var desc = await Country.findAll({
+                    order: sequelize.literal('population DESC')
+                })
+                res.send(desc)
+            }
+            if (population === 'asc'){
+                var asc = await Country.findAll({
+                    order: sequelize.literal('population ASC')
+                })
+                res.send(asc)
+            }
+        }
+        else if(name){
             const getByName = await getCountryByName(name)
             if(getByName.length === 0){
                 return res.json({message: "No hay nada"})
             }
             return res.json(getByName)
+        } 
+        else{
+            const getAll = await getAllCountries()
+            return res.json(getAll)
         }
-        const getAll = await getAllCountries()
-        return res.json(getAll)
+        
     } catch (error) {
         res.send(error)
     }

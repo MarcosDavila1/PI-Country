@@ -1,44 +1,41 @@
 import React from 'react'
 
-function Filtros({handleChangeAlph, handleChangePopu, handleChangeCont}) { 
+function Filtros({handleChangeAlph, handleChangePopulation, handleChangeCont}) { 
 
   return (
     <div>
-        <ul>
-            <li>
-            Alphabetically Sort
-            <select defaultValue='Select' onChange={(e)=> handleChangeAlph(e)}>
-                <option disabled={true}>Select</option>
-                <option value='asc'>A-Z</option>
-                <option value='desc'>Z-A</option>
-            </select>
-            </li>
+        <select defaultValue='Select' onChange={(e)=> handleChangeAlph(e)}>
+            <option disabled={true}>Select</option>
+            <option value='asc'>A-Z</option>
+            <option value='desc'>Z-A</option>
+        </select>
+        
 
-            <li>
-            Population Sort
-            <select defaultValue='Select' onChange={handleChangePopu}>
-                <option disabled={true}>Select</option>
-                <option value='asc'>Ascendant</option>
-                <option value='desc'>Descendant</option>
-            </select>
-            </li>
+        
+        <select defaultValue='Select' onChange={(e)=> handleChangePopulation(e)}>
+            <option disabled={true}>Select</option>
+            <option value='asc'>Ascendant</option>
+            <option value='desc'>Descendant</option>
+        </select>
+        
 
-            <li>
-                Filter by Continent
-                <select defaultValue='Select' onChange={handleChangeCont}>
-                    <option disabled={true}>Select</option>
-                    <option value='america'>America</option>
-                    <option value='africa'>Africa</option>
-                    <option value='asia'>Asia</option>
-                    <option value='europe'>Europe</option>
-                    <option value='oceania'>Oceania</option>
-                </select>
-            </li>
+        
+            
+        <select defaultValue='Select' onChange={handleChangeCont}>
+            <option disabled={true}>Select</option>
+            <option value='south america'>South America</option>
+            <option value='north america'>North America</option>
+            <option value='africa'>Africa</option>
+            <option value='asia'>Asia</option>
+            <option value='europe'>Europe</option>
+            <option value='oceania'>Oceania</option>
+            <option value='antarctica'>Antarctica</option>
+        </select>
+        
 
-            <li>
-                Filter by Tourists Activities
-            </li>
-        </ul>
+        <li>
+            Filter by Tourists Activities
+        </li>        
     </div>
   )
 }

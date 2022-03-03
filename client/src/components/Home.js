@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCountries, sortByAlph } from '../actions';
+import { getCountries, sortByAlph, sortByPopulation, sortByContinent } from '../actions';
 import Countrys from './Countrys';
 import Filtros from './Filtros';
 import NavBar from './NavBar';
@@ -28,20 +28,28 @@ function Home() {
 
   //FILTROS
   function handleChangeAlph(e) {
-    dispatch(sortByAlph(e.target.value))
-    setCurrentPage(()=> 0)
-    setTimeout(() => {
-      setCurrentPage(()=> 1)
-    }, 1);
+    const value = e.target.value;
+    if (value === 'asc' || value === 'desc') {
+      dispatch(sortByAlph(value))
+    }
   }
 
-  function handleChangePopu(e) {
-    console.log(e.target.value)
+  function handleChangePopulation(e) {
+    const value = e.target.value;
+    if (value === 'asc' || value === 'desc') {
+      dispatch(sortByPopulation(value))
+    }
   }
 
   function handleChangeCont(e) {
-      console.log(e.target.value)
+    const value = e.target.value;
+    console.log(value)
+    if(typeof value === 'string'){
+      dispatch(sortByContinent(value))
+    }
   }
+
+  
 
   if(countries.length < 1){
     return (
@@ -53,7 +61,7 @@ function Home() {
         <NavBar/>
         <Filtros 
           handleChangeAlph={handleChangeAlph}
-          handleChangePopu={handleChangePopu}
+          handleChangePopulation={handleChangePopulation}
           handleChangeCont={handleChangeCont}
         />
 

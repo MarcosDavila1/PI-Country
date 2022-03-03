@@ -20,9 +20,29 @@ export function getCountryByName(name){
     }
 }
 
-export const sortByAlph = (sort)=>{
-    return {
-        type: 'SORT_BY_ALPH',
-        payload: sort
+export function sortByAlph(sort){
+    return async function(dispatch){
+        const get = await axios.get(`http://localhost:3001/countries?alph=${sort}`)
+        dispatch({
+            type: 'GET_COUNTRIES',
+            payload: get.data
+        })
+    }
+}
+
+export function sortByPopulation(sort){
+    return async function(dispatch){
+        const get = await axios.get(`http://localhost:3001/countries?population=${sort}`)
+        dispatch({
+            type: 'GET_COUNTRIES',
+            payload: get.data
+        })
+    }
+}
+
+export function sortByContinent(continent){
+    return{
+        type: 'GET_COUNTRIES',
+        payload: continent
     }
 }

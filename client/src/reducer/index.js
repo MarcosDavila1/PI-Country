@@ -1,5 +1,6 @@
 const initialState = {
     countries: [],
+    allCountries: [],
     activities:[],
     countriesName:[],
     countryDetail: {}
@@ -8,9 +9,18 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case 'GET_COUNTRIES':
+            if(typeof action.payload === 'string'){
+                const continent = action.payload;
+                const filter = [...state.allCountries].filter(el => el.continent.toLowerCase() === continent.toLowerCase())
+                return {
+                    ...state,
+                    countries: filter
+                }
+            }
             return {
                 ...state,
-                countries: action.payload
+                countries: action.payload,
+                allCountries: action.payload
             }
         
         case 'GET_COUNTRY_BY_NAME':
@@ -19,36 +29,6 @@ const reducer = (state = initialState, action) => {
                 countries: action.payload
             }
 
-        case 'SORT_BY_ALPH':
-            let sort;
-
-            if(action.payload === 'asc'){ 
-                sort = state.countries.sort((a, b) => {
-                    if(a.name > b.name){
-                        return 1;
-                    }
-                    if(b.name > a.name){
-                        return -1;
-                    }
-                    return 0;
-                })
-            } else if(action.payload === 'desc'){
-                sort = state.countries.sort((a, b) => {
-                    if(a.name > b.name){
-                        return -1;
-                    }
-                    if(b.name > a.name){
-                        return 1;
-                    }
-                    return 0;
-                })
-            }
-
-            return{
-                ...state,
-                countries: sort
-            }
-    
         default:
             return {
                 ...state
