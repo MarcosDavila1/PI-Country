@@ -43,13 +43,12 @@ function Home() {
 
   function handleChangeCont(e) {
     const value = e.target.value;
-    console.log(value)
     if(typeof value === 'string'){
       dispatch(sortByContinent(value))
     }
   }
 
-  
+  // COMPONENTE
 
   if(countries.length < 1){
     return (

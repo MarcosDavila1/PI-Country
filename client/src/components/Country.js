@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Country({currentCountrys}) {
   return (
@@ -7,7 +8,7 @@ function Country({currentCountrys}) {
         return (
             <li key={el.id}>
             <img src={el.image} alt={`${el.name} Flag`}/>
-            <h2>{el.name}</h2>
+            <Link to={`/home/country/${el.name.toLowerCase()}`}>{el.name}</Link>
             <h4>{el.continent}</h4>
             </li>
         )
