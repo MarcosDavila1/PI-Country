@@ -25,4 +25,22 @@ const postActivity = async (req, res) => {
     }
 }
 
-module.exports = postActivity;
+async function getActivites(req, res) {
+    try {
+        let act = await Activity.findAll({
+            include: Country
+        })
+        if(act.length !== 0){
+            res.json(act)
+        } else{
+            res.json({message: 'Does not exist any activity'})
+        }
+    } catch (error) {
+        res.send(error)
+    }
+}
+
+module.exports = {
+    postActivity,
+    getActivites
+};

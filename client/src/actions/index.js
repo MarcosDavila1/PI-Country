@@ -46,3 +46,20 @@ export function sortByContinent(continent){
         payload: continent
     }
 }
+
+export function getActivites(){
+    return async function(dispatch){
+        const get = await axios.get('http://localhost:3001/activity')
+        dispatch({
+            type: 'GET_ACTIVITIES',
+            payload: get.data
+        })
+    }
+}
+
+export function sortByActivity(activity){
+    return{
+        type: 'GET_COUNTRIES',
+        payload: activity
+    }
+}

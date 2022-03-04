@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCountries, sortByAlph, sortByPopulation, sortByContinent } from '../actions';
+import { getCountries, sortByAlph, sortByPopulation, sortByContinent, sortByActivity } from '../actions';
 import Countrys from './Countrys';
 import Filtros from './Filtros';
 import Paged from './Paged';
@@ -47,6 +47,13 @@ function Home() {
     }
   }
 
+  function handleChangeActivity(e) {
+    const value = e.target.value;
+    if(typeof value === 'string'){
+      dispatch(sortByActivity(value))
+    }
+  }
+
   // COMPONENTE
 
   if(countries.length < 1){
@@ -60,6 +67,7 @@ function Home() {
           handleChangeAlph={handleChangeAlph}
           handleChangePopulation={handleChangePopulation}
           handleChangeCont={handleChangeCont}
+          handleChangeActivity={handleChangeActivity}
         />
 
         <Countrys 
