@@ -12,6 +12,8 @@ function CountryDetail(props) {
         dispatch(getCountryByName(name))
     }, [dispatch, name])
 
+    const activitiesCountry = countryDetail[0]?.activities
+
   return (
     <div>
         {countryDetail.length > 0 && 
@@ -24,6 +26,17 @@ function CountryDetail(props) {
                 <h4>{countryDetail[0].subregion}</h4>
                 <h4>{countryDetail[0].area}</h4>
                 <h4>{countryDetail[0].population}</h4>
+                <h4>Country Activities</h4>
+                {activitiesCountry.length > 0 && 
+                    activitiesCountry.map(el => (
+                        <div key={el.id}>
+                            <p>{el.name}</p>    
+                            <p>Difficulty: {el.difficulty}</p>    
+                            <p>Duration: {el.duration}</p>    
+                            <p>Season: {el.season}</p>    
+                        </div>
+                    ))
+                }
             </li>
         }
     </div>

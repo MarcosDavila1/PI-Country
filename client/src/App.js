@@ -11,7 +11,7 @@ import SearchBar from './components/SearchBar';
 function App() {
   return (
     <div className="App">
-      <Route path={'/'} component={NavBar}/>
+      <Route path={'/home'} component={NavBar}/>
       <Route exact path={'/'} component={LandingPage} /> 
       <Route exact path={'/home'} component={SearchBar}/>
       <Route exact path={'/home'} component={Home}/>
