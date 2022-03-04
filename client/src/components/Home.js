@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getCountries, sortByAlph, sortByPopulation, sortByContinent } from '../actions';
 import Countrys from './Countrys';
 import Filtros from './Filtros';
-import NavBar from './NavBar';
 import Paged from './Paged';
 
 function Home() {  
@@ -57,7 +56,6 @@ function Home() {
   } else {
     return (
       <div>
-        <NavBar/>
         <Filtros 
           handleChangeAlph={handleChangeAlph}
           handleChangePopulation={handleChangePopulation}

@@ -18,7 +18,7 @@ const postActivity = async (req, res) => {
             })
             await activity.addCountry(activityCountry)
         })
-        return res.json({message: "Actividad add"})
+        return res.json({message: "Activity succesfully added"})
         
     } catch (error) {
         return res.send(error)

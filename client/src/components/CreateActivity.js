@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { getCountries } from '../actions'
+import axios from 'axios'
+import { useHistory } from 'react-router-dom'
 
 function CreateActivity() {
 
     const dispatch = useDispatch()
     const countries = useSelector(state => state.countries)
+    const history = useHistory()
 
     const [input, setInput] = useState({
         name: '',
@@ -14,6 +17,7 @@ function CreateActivity() {
         season: '',
         countries: []
     })
+    const [errors, setErrors] = useState({})
 
     function handleChange(e){
         e.preventDefault()
@@ -30,13 +34,50 @@ function CreateActivity() {
         setInput({...input, countries: filter})
     }
 
+    //Validaciones
+    function validator(input){
+        let errors = {}
+
+        if(input.name === ''){
+            errors.name = 'Name is required'
+        }
+        if(input.difficulty === ''){
+            errors.difficulty = 'Difficulty is required'
+        }
+        if(input.duration === ''){
+            errors.duration = 'Duration is required'
+        }
+        if(input.season === ''){
+            errors.season = 'Season is required'
+        }
+        if(countries.length === 0){
+            errors.countries = 'At least one Country is required'
+        }
+
+        return errors
+    }
+
+    //Submit
+    async function handleSubmit(e){
+        e.preventDefault()
+        const validacion = validator(input)
+        if(Object.keys(validacion).length === 0){
+            const post = await axios.post('http://localhost:3001/activity', input)        
+            alert(post.data.message)
+            history.push('/home')
+        } else{
+            setErrors(validacion)
+        }           
+    }
+
     useEffect(()=>{
         dispatch(getCountries())
     }, [dispatch])
 
   return (
     <div>
-        <form>
+        <form onSubmit={handleSubmit}>
+            {errors.name && <p>{errors.name}</p>}
             <label>Name</label>
             <input
             type='text'
@@ -46,6 +87,7 @@ function CreateActivity() {
             onChange={handleChange}
             />
             
+            {errors.difficulty && <p>{errors.difficulty}</p>}
             <label>Difficulty</label>
             <select name='difficulty' defaultValue='Select' onChange={handleChange}>
                 <option disabled={true}>Select</option>
@@ -56,6 +98,7 @@ function CreateActivity() {
                 <option>5</option>
             </select>
 
+            {errors.duration && <p>{errors.duration}</p>}
             <label>Duration</label>
             <input 
             type='text'
@@ -65,15 +108,17 @@ function CreateActivity() {
             onChange={handleChange}            
             />
 
+            {errors.season && <p>{errors.season}</p>}
             <label>Season</label>
             <select name='season' defaultValue='Select' onChange={handleChange}>
                 <option disabled={true}>Select</option>
-                <option value='summer'>Summer</option>
-                <option value='autumn'>Autumn</option>
-                <option value='winter'>Winter</option>
-                <option value='spring'>Spring</option>
+                <option value='Summer'>Summer</option>
+                <option value='Autumn'>Autumn</option>
+                <option value='Winter'>Winter</option>
+                <option value='Spring'>Spring</option>
             </select>
 
+            {errors.countries && <p>{errors.countries}</p>}
             <label>Countries</label>
             <select name='countries' defaultValue='Select' onChange={handleAddCountry}>
                 <option disabled={true}>Select</option>
@@ -95,6 +140,11 @@ function CreateActivity() {
                     ))
                 }
             </div>
+
+            <input 
+                type='submit'
+                value='Create Activity'
+            />
         </form>
     </div>
   )
