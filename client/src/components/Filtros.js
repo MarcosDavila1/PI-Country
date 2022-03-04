@@ -44,8 +44,8 @@ function Filtros({handleChangeAlph, handleChangePopulation, handleChangeCont, ha
 
         <select defaultValue='Select' onChange={handleChangeActivity}>
             <option disabled={true}>Select</option>
-            {activities.length !== 0 && 
-                activities.map(el => (
+            {activities?.length !== 0 &&
+                activities?.map(el => (
                     <option key={el.id} value={el.name}>{el.name.charAt(0).toUpperCase() + el.name.slice(1)}</option>
                 ))
             }

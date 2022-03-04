@@ -5,7 +5,7 @@ function NavBar() {
 
   return (
     <div>
-        <Link to={'/home'}>Country App</Link>
+        <a href={'/home'}>Country App</a>
         <Link to={'/home/create'}>Create Activity</Link>
     </div>
   )

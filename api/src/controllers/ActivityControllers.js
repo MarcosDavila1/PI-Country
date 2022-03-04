@@ -32,8 +32,6 @@ async function getActivites(req, res) {
         })
         if(act.length !== 0){
             res.json(act)
-        } else{
-            res.json({message: 'Does not exist any activity'})
         }
     } catch (error) {
         res.send(error)

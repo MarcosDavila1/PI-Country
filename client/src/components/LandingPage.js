@@ -1,11 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import styles from '../styles/landingpage.module.css'
 
 function LandingPage() {
   return (
-    <div>
-        <h1>Bienvenidos a la mejor app</h1>
-        <Link to={'/home'}>Ingresar</Link>
+    <div className={styles.container}>
+      <div className={styles.containerText}>
+        <h1>Country App</h1>
+        <Link to={'/home'} className={styles.btn}>Ingresar</Link>
+      </div>
     </div>
   )
 }
