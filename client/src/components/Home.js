@@ -4,6 +4,7 @@ import { getCountries, sortByAlph, sortByPopulation, sortByContinent, sortByActi
 import Countrys from './Countrys';
 import Filtros from './Filtros';
 import Paged from './Paged';
+import styles from '../styles/home.module.css'
 
 function Home() {  
   const countries = useSelector(state => state.countries)
@@ -62,7 +63,7 @@ function Home() {
     )
   } else {
     return (
-      <div>
+      <div className={styles.container}>
         <Filtros 
           handleChangeAlph={handleChangeAlph}
           handleChangePopulation={handleChangePopulation}
