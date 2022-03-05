@@ -1,4 +1,5 @@
 import React from 'react'
+import styles from '../styles/paged.module.css'
 
 function Paged({itemsPerPage, countries, paged}) {
 
@@ -10,11 +11,11 @@ function Paged({itemsPerPage, countries, paged}) {
     }
 
     return (
-    <nav>
-        <ul>
+    <nav className={styles.container}>
+        <ul className={styles.ul}>
             {
             pageNumber?.map(n =>(
-                <button onClick={()=>paged(n)} key={n}>{n}</button>
+                <button className={styles.btn} onClick={()=>paged(n)} key={n}>{n}</button>
             ))
             }
         </ul>
