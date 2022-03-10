@@ -26,11 +26,24 @@ function Home() {
     dispatch(getCountries())
   }, [dispatch])
 
+  //CSS CLASS PAGINA ACTUAL
+  function handleSelect(id){
+    const btns = document.getElementsByTagName('button')
+    for(const btn of btns){
+        btn.classList.remove('active')
+        btn.classList.add('btn')
+    }
+    const elem = document.getElementById(id)
+    elem.className = 'active'
+}
+
   //FILTROS
   function handleChangeAlph(e) {
     const value = e.target.value;
     if (value === 'asc' || value === 'desc') {
       dispatch(sortByAlph(value))
+      setCurrentPage(1)
+      handleSelect('paged0')
     }
   }
 
@@ -38,6 +51,8 @@ function Home() {
     const value = e.target.value;
     if (value === 'asc' || value === 'desc') {
       dispatch(sortByPopulation(value))
+      setCurrentPage(1)
+      handleSelect('paged0')
     }
   }
 
@@ -45,6 +60,8 @@ function Home() {
     const value = e.target.value;
     if(typeof value === 'string'){
       dispatch(sortByContinent(value))
+      setCurrentPage(1)
+      handleSelect('paged0')
     }
   }
 
@@ -52,6 +69,8 @@ function Home() {
     const value = e.target.value;
     if(typeof value === 'string'){
       dispatch(sortByActivity(value))
+      setCurrentPage(1)
+      handleSelect('paged0')
     }
   }
 
@@ -59,7 +78,9 @@ function Home() {
 
   if(countries.length < 1){
     return (
-      <h1>Cargando espere</h1>
+      <div className={styles.loading}>
+        <div className={styles.spinner}></div>
+      </div>
     )
   } else {
     return (
@@ -71,15 +92,22 @@ function Home() {
           handleChangeActivity={handleChangeActivity}
         />
 
-        <Countrys 
-          currentCountrys={currentCountrys}
-        />
-
         <Paged 
           itemsPerPage={itemsPerPage}
           countries={countries.length}
           paged={paged}
+          handleSelect={handleSelect}
         />
+
+        <Countrys 
+          currentCountrys={currentCountrys}
+        />
+
+        {/* <Paged 
+          itemsPerPage={itemsPerPage}
+          countries={countries.length}
+          paged={paged}
+        /> */}
 
       </div>
     )

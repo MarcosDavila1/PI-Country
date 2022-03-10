@@ -19,9 +19,15 @@
 .link{
     text-decoration: none;
     color: #000;
+    border-bottom: 2px solid transparent;
     margin-top: 1rem;
     font-size: 2rem;
     font-weight: 600;
+    transition: 0.2s;
+}
+.link:hover{
+    border-bottom: 2px solid rgb(85, 85, 85);
+    transition: 0.2s;
 }
 .content h4{
     margin: 1rem 0;

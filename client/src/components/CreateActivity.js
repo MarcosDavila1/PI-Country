@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getCountries } from '../actions'
 import axios from 'axios'
 import { useHistory } from 'react-router-dom'
+import styles from '../styles/createactivity.module.css'
 
 function CreateActivity() {
 
@@ -50,10 +51,10 @@ function CreateActivity() {
         if(input.season === ''){
             errors.season = 'Season is required'
         }
-        if(countries.length === 0){
+        if(input.countries.length === 0){
             errors.countries = 'At least one Country is required'
         }
-
+        console.log(errors)
         return errors
     }
 
@@ -75,76 +76,95 @@ function CreateActivity() {
     }, [dispatch])
 
   return (
-    <div>
-        <form onSubmit={handleSubmit}>
-            {errors.name && <p>{errors.name}</p>}
-            <label>Name</label>
-            <input
-            type='text'
-            name='name' 
-            placeholder='Activity Name'
-            value={input.name}
-            onChange={handleChange}
-            />
+    <div className={styles.container}>
+        <form className={styles.form} onSubmit={handleSubmit}>
             
-            {errors.difficulty && <p>{errors.difficulty}</p>}
-            <label>Difficulty</label>
-            <select name='difficulty' defaultValue='Select' onChange={handleChange}>
-                <option disabled={true}>Select</option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-            </select>
-
-            {errors.duration && <p>{errors.duration}</p>}
-            <label>Duration</label>
-            <input 
-            type='text'
-            name='duration' 
-            placeholder='Duration'
-            value={input.duration}
-            onChange={handleChange}            
-            />
-
-            {errors.season && <p>{errors.season}</p>}
-            <label>Season</label>
-            <select name='season' defaultValue='Select' onChange={handleChange}>
-                <option disabled={true}>Select</option>
-                <option value='Summer'>Summer</option>
-                <option value='Autumn'>Autumn</option>
-                <option value='Winter'>Winter</option>
-                <option value='Spring'>Spring</option>
-            </select>
-
-            {errors.countries && <p>{errors.countries}</p>}
-            <label>Countries</label>
-            <select name='countries' defaultValue='Select' onChange={handleAddCountry}>
-                <option disabled={true}>Select</option>
-                {countries.length > 0 &&
-                    countries.map(country => (
-                        <option itemType='checkbox' key={country.id}>{country.name}</option>
-                    ))
-                }
-            </select>
+            <div className={styles.field}>
+                <label>Name</label>
+                <input
+                type='text'
+                name='name' 
+                placeholder='Activity Name'
+                value={input.name}
+                onChange={handleChange}
+                />
+            </div>
+            {errors.name && <p className={styles.error}>{errors.name}</p>}
             
-            <div>
+            
+            <div className={styles.field}>
+                <label>Difficulty</label>
+                <select className={styles.select} name='difficulty' defaultValue='Select' onChange={handleChange}>
+                    <option disabled={true}>Select</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+            </div>
+            {errors.difficulty && <p className={styles.error}>{errors.difficulty}</p>}
+
+            
+            <div className={styles.field}>
+                <label>Duration</label>
+                <input 
+                type='text'
+                name='duration' 
+                placeholder='Duration'
+                value={input.duration}
+                onChange={handleChange}            
+                />
+            </div>
+            {errors.duration && <p className={styles.error}>{errors.duration}</p>}
+
+            
+            <div className={styles.field}>
+                <label>Season</label>
+                <select className={styles.select} name='season' defaultValue='Select' onChange={handleChange}>
+                    <option disabled={true}>Select</option>
+                    <option value='Summer'>Summer</option>
+                    <option value='Autumn'>Autumn</option>
+                    <option value='Winter'>Winter</option>
+                    <option value='Spring'>Spring</option>
+                </select>
+            </div>
+            {errors.season && <p className={styles.error}>{errors.season}</p>}
+
+            
+            <div className={styles.field}>
+                <label>Countries</label>
+                <select className={styles.select} name='countries' defaultValue='Select' onChange={handleAddCountry}>
+                    <option disabled={true}>Select</option>
+                    {countries.length > 0 &&
+                        countries.map(country => (
+                            <option itemType='checkbox' key={country.id}>{country.name}</option>
+                        ))
+                    }
+                </select>
+            </div>
+            {errors.countries && <p className={styles.error}>{errors.countries}</p>}
+            
+            <div className={styles.containercountrys}>
                 <h4>Countrys Add</h4>
+                <div className={styles.containercountries}>
                 {input.countries.length > 0 &&
                     input.countries.map((country, index) => (
-                        <div key={index}>
+                        <div className={styles.country} key={index}>
                             <p>{country}</p>
                             <button type='button' onClick={()=> removeCountry(country)}>X</button>
                         </div>
                     ))
                 }
+                </div>
             </div>
-
-            <input 
-                type='submit'
-                value='Create Activity'
-            />
+            
+            <div className={styles.containerbtn}>
+                <input 
+                    type='submit'
+                    value='Create Activity'
+                />
+            </div>
         </form>
     </div>
   )

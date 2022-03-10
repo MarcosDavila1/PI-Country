@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from '../styles/paged.module.css'
 
-function Paged({itemsPerPage, countries, paged}) {
+function Paged({itemsPerPage, countries, paged, handleSelect}) {
 
     const pageNumber = [];
 
@@ -10,12 +10,17 @@ function Paged({itemsPerPage, countries, paged}) {
         
     }
 
+    useEffect(()=>{
+        const primerPagina = document.getElementById('paged0')
+        primerPagina.className = 'active'
+    }, [])
+
     return (
     <nav className={styles.container}>
         <ul className={styles.ul}>
             {
-            pageNumber?.map(n =>(
-                <button className={styles.btn} onClick={()=>paged(n)} key={n}>{n}</button>
+            pageNumber?.map((n, i) =>(
+                <button id={`paged${i}`} className={styles.btn} onClick={()=>(paged(n), handleSelect(`paged${i}`))} key={n}>{n}</button>
             ))
             }
         </ul>

@@ -12,6 +12,12 @@
     font-weight: 800;
     margin: 0 2rem;
     font-family: 'Playfair Display', serif;
+    border-bottom: 2px solid transparent;
+    transition: 0.2s;
+}
+.country:hover{
+    border-bottom: 2px solid rgb(85, 85, 85);
+    transition: 0.2s;
 }
 .btn{
     font-size: 2rem;

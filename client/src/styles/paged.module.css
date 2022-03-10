@@ -1,7 +1,6 @@
 .container{
     margin: 0;
     padding: 0;
-    background-color: rgba(82, 82, 82, 0.6);
 }
 .btn{
     padding: 0.5rem;
@@ -10,8 +9,8 @@
     border-radius: 1rem;
     font-size: 1rem;
     font-weight: 600;
-    background-color: transparent;
-    color: #fff;
+    background-color: rgb(185, 185, 185);
+    color: rgb(48, 48, 48);
     transition: 0.3s;
 }
 .btn:hover{

@@ -1,0 +1,117 @@
+.container{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    /* height: 83.5vh; */
+}
+.form{
+    background-color: rgb(177, 177, 177);
+    display: flex;
+    margin-top: 2rem;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 60%;
+    border-radius: 2rem;
+    margin-bottom: 5rem;
+}
+.field{
+    display: flex;
+    width: 70%;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0.5rem 0rem;
+}
+.field:first-of-type{
+    margin-top: 2rem;
+}
+.field label{
+    font-size: 1.3rem;
+}
+.field input{
+    margin-left: 2rem;
+    padding: 0 1rem;
+    width: 26rem;
+    font-size: 1.1rem;
+    border-radius: 1rem;
+    border: none;
+}
+.select{
+    padding: 0.2rem 1rem;
+    margin-left: 2rem;
+    background-color: rgb(187, 187, 187);
+    border-radius: 1rem;
+    font-size: 1rem;
+    width: 28rem;
+    border: 1px solid rgb(146, 146, 146);
+    box-shadow: 5px 5px 10px 5px rgb(104, 104, 104);
+    transition: 0.3s;
+}
+.select:hover{
+    cursor: pointer;
+    background-color: rgb(145, 145, 145);
+    color: #fff;
+    transition: 0.3s;
+}
+.error{
+    margin: 0;
+    color: rgb(235, 35, 35);
+    font-weight: 600;
+}
+.containercountrys{
+
+}
+.containercountrys h4{
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+.containercountries{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.country{
+    display: flex;
+    background-color: rgb(145, 145, 145);
+    margin: 0 0.5rem;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 1rem;
+}
+.country p{
+    margin: 0;
+    color: #fff;
+}
+.country button{
+    margin-left: 0.5rem;
+    padding: 0.1 0.5rem;
+    border: none;
+    border-radius: 0.2rem;
+    color: #fff;
+    background-color: rgb(233, 56, 56);
+    transition: 0.2s;
+}
+.country button:hover{
+    cursor: pointer;
+    color: #fff;
+    background-color: rgb(235, 19, 19);
+    transition: 0.2s;
+}
+.containerbtn input{
+    border: 2px solid #000;
+    color: #000;
+    background-color: transparent;
+    padding: 0.5rem 2rem;
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin: 0.5rem 0;
+    margin-bottom: 1.5rem;
+    transition: 0.2s;
+}
+.containerbtn input:hover{
+    cursor: pointer;
+    color: #fff;
+    background-color: #000;
+    transition: 0.2s;
+}

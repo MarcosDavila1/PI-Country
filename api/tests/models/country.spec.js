@@ -6,15 +6,15 @@ describe('Country model', () => {
     .catch((err) => {
       console.error('Unable to connect to the database:', err);
     }));
-  describe('Validators', () => {
+  describe('Validar Nombre del Model Country', () => {
     beforeEach(() => Country.sync({ force: true }));
-    describe('name', () => {
-      it('should throw an error if name is null', (done) => {
+    describe('Nombre', () => {
+      it('Deberia tirar un error si name esta vacio', (done) => {
         Country.create({})
           .then(() => done(new Error('It requires a valid name')))
           .catch(() => done());
       });
-      it('should work when its a valid name', () => {
+      it('Deberia funcionar cuando tiene un nombre valido', () => {
         Country.create({ name: 'Argentina' });
       });
     });
