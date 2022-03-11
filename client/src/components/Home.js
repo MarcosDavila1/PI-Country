@@ -5,6 +5,7 @@ import Countrys from './Countrys';
 import Filtros from './Filtros';
 import Paged from './Paged';
 import styles from '../styles/home.module.css'
+import Loading from './Loading';
 
 function Home() {  
   const countries = useSelector(state => state.countries)
@@ -78,9 +79,7 @@ function Home() {
 
   if(countries.length < 1){
     return (
-      <div className={styles.loading}>
-        <div className={styles.spinner}></div>
-      </div>
+      <Loading />
     )
   } else {
     return (
