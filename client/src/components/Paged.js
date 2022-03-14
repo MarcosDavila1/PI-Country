@@ -20,7 +20,7 @@ function Paged({itemsPerPage, countries, paged, handleSelect}) {
         <ul className={styles.ul}>
             {
             pageNumber?.map((n, i) =>(
-                <button id={`paged${i}`} className={styles.btn} onClick={()=>(paged(n), handleSelect(`paged${i}`))} key={n}>{n}</button>
+                <button id={`paged${i}`} className={styles.btn} onClick={()=>{return (paged(n), handleSelect(`paged${i}`))}} key={n}>{n}</button>
             ))
             }
         </ul>

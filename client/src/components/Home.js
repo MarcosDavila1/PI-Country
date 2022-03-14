@@ -101,13 +101,6 @@ function Home() {
         <Countrys 
           currentCountrys={currentCountrys}
         />
-
-        {/* <Paged 
-          itemsPerPage={itemsPerPage}
-          countries={countries.length}
-          paged={paged}
-        /> */}
-
       </div>
     )
   }

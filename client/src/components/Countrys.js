@@ -1,5 +1,6 @@
 import React from 'react'
 import Country from './Country'
+import Loading from './Loading'
 import styles from '../styles/countrys.module.css'
 
 function Countrys({currentCountrys}) {
@@ -7,7 +8,7 @@ function Countrys({currentCountrys}) {
     <div className={styles.container}>
         {currentCountrys.length
             ? <Country currentCountrys={currentCountrys}/> 
-            : <h2>Cargando... espere un momento</h2>
+            : <Loading />
         }
     </div>
   )
