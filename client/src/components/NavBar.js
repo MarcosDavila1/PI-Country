@@ -6,7 +6,7 @@ function NavBar() {
 
   return (
     <div className={styles.container}>
-        <a className={styles.country} href={'/home'}>Country App</a>
+        <Link className={styles.country} to={'/home'}>Country App</Link>
         <Link className={styles.btn} to={'/home/create'}>Create Activity</Link>
     </div>
   )

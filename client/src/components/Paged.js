@@ -5,14 +5,17 @@ function Paged({itemsPerPage, countries, paged, handleSelect}) {
 
     const pageNumber = [];
 
-    for (let i = 0; i <= Math.ceil(countries/itemsPerPage)-1; i++) {
+    for (let i = 0; i <= (countries/itemsPerPage) - 1; i++) {
         pageNumber.push(i+1);
         
     }
 
     useEffect(()=>{
         const primerPagina = document.getElementById('paged0')
-        primerPagina.className = 'active'
+        if(primerPagina){
+            primerPagina.className = 'active'
+        }
+        
     }, [])
 
     return (

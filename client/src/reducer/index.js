@@ -27,6 +27,7 @@ const reducer = (state = initialState, action) => {
             } else if(typeof action.payload === 'string'){
                 const activity = action.payload;
                 const filter = [...state.allActivities].filter(el => el.name.toLowerCase() === activity.toLowerCase())
+                // console.log(filter)
                 const result = filter[0].countries
                 return{
                     ...state,
